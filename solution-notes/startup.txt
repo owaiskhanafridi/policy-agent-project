@@ -1,0 +1,12 @@
+Setting up and Running the Projects
+
+API: 
+-Please following commands to install ollama cli and pull the models using following commands:
+irm https://ollama.com/install.ps1 | iex
+ollama pull qwen3
+ollama pull nomic-embed-text
+
+UI: 
+cd frontend
+yarn install
+yarn dev

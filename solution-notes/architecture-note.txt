@@ -1,0 +1,31 @@
+I built a RAG policy assistant using MAF with a local LLM hosted through Ollama. The application consists of a .NET backend and a 
+minimal React frontend using CopilotKit over the AG-UI protocol.
+
+At startup, the application loads Markdown policy documents, parses them into logical chunks, and generates embeddings using the 
+nomic-embed-text embedding model. These embeddings are cached in memory for the lifetime of the application. 
+
+When a user asks a question, the MAF agent invokes a custom search_policy tool, which performs semantic similarity search over the 
+embedded policy chunks. The retrieved evidence is then provided to the language model (qwen3) to generate a grounded response 
+containing policy citations. If no relevant evidence is found, the agent returns "I do not have grounded evidence for this." 
+rather than generating an unsupported answer.
+
+Important Files:
+- PolicyRepository.cs: loads and chunks the policy document.
+- EmbeddingPolicySearcService.cs: generate embeddings and perform semantic search.
+- PolicySearchTool.cs: exposes policy search as a MAF tool.
+- ConversationMemory.cs - maintains short term conversation memory.
+- React + Copilotkit (project): provides a minimal streaming chat interfce.
+
+
+Q. What you would build differently with more time?
+Answer: With additional time, I would replace the in-memory vector store with a dedicated vector database such as Azure AI Search.
+This would eliminate the need to generate embeddings at startup and improve retrieval performance for larger document knowledge 
+base. I would Also try to provide suggestions/autocomplete while the user is typing based on document data. I would also work more 
+on the placement of each files in the API and divide them in folders so it becomes easier to find them instead of having everything
+ in one folder.
+
+Q. one tradeoff you made consciously ?
+Answer: I chose to keep the retrieval pipeline simple by returning the top matching policy chuns directly, rather than adding a 
+reranking step. This kept the implementation easier to understand and complete within the assignment timeframe, 
+while still producing grounded respones.
+

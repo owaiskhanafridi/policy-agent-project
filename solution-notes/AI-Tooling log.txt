@@ -1,0 +1,22 @@
+Following is the log of AI tooling in terms of how AI assistance was utilized and how its suggestions were accepted/rejected.
+
+1. Initially, EmbeddingPolicySearchService only returned chunks with a similarity score above 0.70. During testing, 
+I found that relevant chunks were being excluded due to wording differences. After exploring retrieval strategies with AI and 
+validating the results myself, I removed the fixed threshold to improve retrieval quality.
+
+2. Another reason for less scores from ConsineSimilarity was the size of chunks I was creating. I was initially creating chunks
+based on the section (containing all the sub sections in it). Which made the chunk text quite large and the embeddings were 
+not accurately being compared with the question's embedding. As a result, relevant embeddings were ignored, score went down and 
+wrong answers/citations were returned in response. I used AI to refine this approach and instead chunked the policy document based on section, 
+sub section which improved the relevance of retrieved context.
+
+3. There were some issues with react project's copilotkit/react-core/v2/style.css reference. Due to which the default built-in chat
+screen was not populating. I used AI to understand what the problem was and eventually removed 
+
+4. There were issues with the React project's @copilotkit/react-core/v2/styles.css import, 
+which prevented the built-in chat UI from rendering correctly. I used AI to investigate the issue and eventually removed the 
+problematic dependency/configuration and adjusted the frontend setup so the application could communicate correctly with the MAF AG-UI backend.
+
+5. I used AI to diagnose CopilotKit streaming failures with Ollama due to which I was getting connection errors in the frontend app. 
+Some guide on the internet suggested I should align the versions of the model and also use a middleware which injects a messageId 
+into streamed responses.

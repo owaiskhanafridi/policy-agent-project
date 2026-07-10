@@ -1,0 +1,41 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+# Visual Studio workspace/state
+VSWorkspaceState.json
+DocumentLayout*.json
+
+# SQLite databases
+*.sqlite
+*.db
+
+# Build output
+bin/
+obj/
+dist/
+
+# Node.js dependencies
+node_modules/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
